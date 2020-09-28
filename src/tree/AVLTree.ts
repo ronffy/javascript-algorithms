@@ -2,68 +2,23 @@
  * @description 二叉平衡树
  * @author ronffy
  * @Date 2020-09-25 17:27:10
- * @LastEditTime 2020-09-28 17:51:44
+ * @LastEditTime 2020-09-28 18:14:43
  * @LastEditors ronffy
  */
 import BinarySearchTree from './BinarySearchTree';
 import defaultCompare from '../utils/compare'
 import TreeNode from '../utils/TreeNode';
+import defaultBalance, { Balance } from '../utils/balance';
 
-class Balance {
-  static UNBALANCED_RIGHT = -2
-  static SLIGHTLY_UNBALANCED_RIGHT = -1
-  static BALANCED = 0
-  static SLIGHTLY_UNBALANCED_LEFT = 1
-  static UNBALANCED_LEFT = 2
-  static ERROR_FACTOR = 99
+export default class AVLTree extends BinarySearchTree {
+  // 平衡方法
+  balance: Balance
 
-  getFactor(diff) {
-    switch (diff) {
-      case -2:
-        return Balance.UNBALANCED_RIGHT
-      case -1:
-        return Balance.SLIGHTLY_UNBALANCED_RIGHT
-      case 0:
-        return Balance.BALANCED
-      case 1:
-        return Balance.SLIGHTLY_UNBALANCED_LEFT
-      case 2:
-        return Balance.UNBALANCED_LEFT
-
-      default:
-        return Balance.ERROR_FACTOR
-    }
-  }
-
-  // 平衡
-  isBalance = (diff) =>
-    this.getFactor(diff) === Balance.BALANCED
-
-  // 右不平衡
-  isUnBalanceRight = (diff) =>
-    this.getFactor(diff) === Balance.UNBALANCED_RIGHT
-  // 右稍不平衡
-  isUnBalanceSlightlyRight = (diff) =>
-    this.getFactor(diff) === Balance.SLIGHTLY_UNBALANCED_RIGHT
-
-  // 左不平衡
-  isUnBalanceLeft = (diff) =>
-    this.getFactor(diff) === Balance.UNBALANCED_LEFT
-  // 左稍不平衡
-  isUnBalanceSlightlyLeft = (diff) =>
-    this.getFactor(diff) === Balance.SLIGHTLY_UNBALANCED_LEFT
-
-}
-
-
-const balance = new Balance();
-
-
-export default class AVLTree extends BinarySearchTree {  
-  constructor(compare = defaultCompare) {
+  constructor(compare = defaultCompare, balance = defaultBalance) {
     super(compare);
     this.root = null;
     this.compare = compare;
+    this.balance = balance;
   }
 
 
@@ -136,7 +91,7 @@ export default class AVLTree extends BinarySearchTree {
       return node;
     }
     const heightDiff = this.getNodeHeightDiff(node)
-    const { isBalance, isUnBalanceLeft, isUnBalanceRight } = balance;
+    const { isBalance, isUnBalanceLeft, isUnBalanceRight } = this.balance;
     const { isLess, isBig } = this.compare;
 
     if (isBalance(heightDiff)) {
