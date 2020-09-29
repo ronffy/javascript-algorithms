@@ -2,7 +2,7 @@
  * @description 树相关示例
  * @author ronffy
  * @Date 2020-09-25 15:12:18
- * @LastEditTime 2020-09-29 15:31:06
+ * @LastEditTime 2020-09-29 15:50:23
  * @LastEditors ronffy
  */
 import BinarySearchTree from '../src/tree/BinarySearchTree'
@@ -49,6 +49,9 @@ console.log('avlTree', JSON.stringify(avlTree.root));
 avlTree.remove(1)
 avlTree.remove(3)
 
+console.log('avlTree', JSON.stringify(avlTree.root));
+
+avlTree.flipLeftRight();
 console.log('avlTree', JSON.stringify(avlTree.root));
 
 
