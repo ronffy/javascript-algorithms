@@ -2,7 +2,7 @@
  * @description 比较大小的方法
  * @author ronffy
  * @Date 2020-09-25 14:41:49
- * @LastEditTime 2020-09-28 17:52:19
+ * @LastEditTime 2020-09-29 10:55:30
  * @LastEditors ronffy
  */
 
@@ -12,6 +12,10 @@ export class Compare {
   static BIG = 1
   static defaultCompare = (a, b) => a - b
 
+  /**
+   * @description 对比a、b两个值的大小
+   * @return {number} > 0:a > b; <0: a < b; =0: a = b;
+   */
   compare: (a: any, b: any) => number
 
   /**
@@ -43,8 +47,9 @@ export class Compare {
     return this.getResult(a, b) === Compare.EQUAL
   }
 
-  isEmpty = (a) => {
-    return a == null
+  // 判断值是否为空
+  isEmpty = (v) => {
+    return v == null
   }
 }
 

@@ -2,7 +2,7 @@
  * @description 树相关示例
  * @author ronffy
  * @Date 2020-09-25 15:12:18
- * @LastEditTime 2020-09-28 18:04:41
+ * @LastEditTime 2020-09-29 15:31:06
  * @LastEditors ronffy
  */
 import BinarySearchTree from '../src/tree/BinarySearchTree'
@@ -11,16 +11,16 @@ import AVLTree from '../src/tree/AVLTree'
 function insert(tree) {
   tree.insert(3)
   tree.insert(4)
-  tree.insert(2)
+  tree.insert(12)
   tree.insert(9)
-  tree.insert(6)
-  tree.insert(7)
+  tree.insert(27)
   tree.insert(1)
   tree.insert(5)
   tree.insert(11)
-  tree.insert(17)
   tree.insert(15)
-  tree.insert(13)
+  tree.insert(36)
+  tree.insert(6)
+  tree.insert(8)
 }
 
 const binarySearchTree = new BinarySearchTree();
@@ -43,13 +43,17 @@ console.log('--search6:', binarySearchTree.search(6));
 
 const avlTree = new AVLTree();
 insert(avlTree)
+
+console.log('avlTree', JSON.stringify(avlTree.root));
+
+avlTree.remove(1)
+avlTree.remove(3)
+
+console.log('avlTree', JSON.stringify(avlTree.root));
+
+
 avlTree.each((node, i) => {
-  console.log('avlTree each-' + i + ':', node);
-}, 'postOrder')
+  console.log('avlTree each-' + i + ':', node.key);
+})
 
-// window.avlTree = avlTree;
-
-
-
-// console.log('avlTree', JSON.stringify(avlTree.root));
-
+window.avlTree = avlTree;

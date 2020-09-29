@@ -2,7 +2,7 @@
  * @description 二叉平衡树
  * @author ronffy
  * @Date 2020-09-25 17:27:10
- * @LastEditTime 2020-09-28 18:14:43
+ * @LastEditTime 2020-09-29 15:38:42
  * @LastEditors ronffy
  */
 import BinarySearchTree from './BinarySearchTree';
@@ -20,7 +20,6 @@ export default class AVLTree extends BinarySearchTree {
     this.compare = compare;
     this.balance = balance;
   }
-
 
   getNodeHeight(node) {
     if (node == null) {
@@ -42,7 +41,7 @@ export default class AVLTree extends BinarySearchTree {
   }
 
   // 向左旋转一下
-  rotateL(node) {
+  private rotateL(node) {
     const tmp = node.right;
     node.right = tmp.left;
     tmp.left = node;
@@ -60,7 +59,7 @@ export default class AVLTree extends BinarySearchTree {
     return this.rotateL(node);
   }
 
-  getNodeHeightDiff(node) {
+  getHeightDiff(node) {
     return this.getNodeHeight(node.left) - this.getNodeHeight(node.right);
   }
 
@@ -68,7 +67,8 @@ export default class AVLTree extends BinarySearchTree {
   insert(key) {
     this.root = this.insertNode(this.root, key);
   }
-  insertNode(node, key) {
+
+  protected insertNode(node, key) {
     const { isEmpty, isLess, isEqual } = this.compare;
     if (isEmpty(node)) {
       return new TreeNode(key);
@@ -83,14 +83,15 @@ export default class AVLTree extends BinarySearchTree {
       node.right = this.insertNode(node.right, key);
     }
 
-    return this.rotateBalance(node, key);
+    return this.balanceInsertNode(node, key);
   }
 
-  rotateBalance(node, key) {
+  // 平衡执行插入操作后的节点
+  protected balanceInsertNode(node, key) {
     if (!node) {
       return node;
     }
-    const heightDiff = this.getNodeHeightDiff(node)
+    const heightDiff = this.getHeightDiff(node)
     const { isBalance, isUnBalanceLeft, isUnBalanceRight } = this.balance;
     const { isLess, isBig } = this.compare;
 
@@ -110,6 +111,56 @@ export default class AVLTree extends BinarySearchTree {
         node = this.rotateL(node);
       } else {
         node = this.rotateRRL(node);
+      }
+    }
+
+    return node;
+  }
+
+  remove(key) {
+    this.root = this.removeNode(this.root, key);
+  }
+  
+  protected removeNode(node: TreeNode, key) {
+    node = super.removeNode(node, key);
+    node = this.balanceRemoveNode(node);
+    return node;
+  }
+
+  // 平衡执行删除操作后的节点
+  protected balanceRemoveNode(node) {
+    const {
+      isBalance,
+      isUnBalanceLeft,
+      isUnBalanceSlightlyLeft,
+      isUnBalanceRight,
+      isUnBalanceSlightlyRight
+    } = this.balance;
+    const { isEmpty } = this.compare;
+    if (isEmpty(node)) {
+      return null;
+    }
+
+    const heightDiff = this.getHeightDiff(node)
+    if (isUnBalanceLeft(heightDiff)) {
+      const leftNode = node.left;
+      const diff = this.getHeightDiff(leftNode)
+      if (isBalance(diff) || isUnBalanceSlightlyLeft(diff)) {
+        return this.rotateR(node);
+      }
+      if (isUnBalanceRight(diff)) {
+        return this.rotateLLR(leftNode)
+      }
+    }
+
+    if (isUnBalanceRight(heightDiff)) {
+      const rightNode = node.right;
+      const diff = this.getHeightDiff(rightNode)
+      if (isBalance(diff) || isUnBalanceSlightlyRight(diff)) {
+        return this.rotateL(node);
+      }
+      if (isUnBalanceSlightlyLeft(diff)) {
+        return this.rotateRRL(rightNode);
       }
     }
 

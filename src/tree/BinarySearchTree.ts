@@ -2,7 +2,7 @@
  * @description 二叉搜索树
  * @author ronffy
  * @Date 2020-09-25 14:40:26
- * @LastEditTime 2020-09-28 17:51:51
+ * @LastEditTime 2020-09-29 15:34:33
  * @LastEditors ronffy
  */
 
@@ -26,7 +26,7 @@ export default class BinarySearchTree {
       this.root = this.insertNode(this.root, key);
     }
   }
-  insertNode(node, key) {
+  protected insertNode(node, key) {
     const { isEmpty, isLess } = this.compare;
     if (isEmpty(node)) {
       return new TreeNode(key);
@@ -40,7 +40,7 @@ export default class BinarySearchTree {
     return node;
   }
 
-  private each_i = 0;
+  protected each_i = 0;
   /**
    * @param {'inOrder' | 'preOrder' | 'postOrder'} orderType 遍历方式（中序、前序、后序）
    */
@@ -51,7 +51,7 @@ export default class BinarySearchTree {
     });
     this.each_i = 0;
   }
-  eachNode(node, callbacks) {
+  protected eachNode(node, callbacks) {
     const {
       inOrder,
       preOrder,
@@ -79,7 +79,7 @@ export default class BinarySearchTree {
     }
     return this.minNode(this.root);
   }
-  minNode(node) {
+  protected minNode(node) {
     if (this.compare.isEmpty(node.left)) {
       return node;
     }
@@ -93,7 +93,7 @@ export default class BinarySearchTree {
     }
     return this.maxNode(this.root);
   }
-  maxNode(node) {
+  protected maxNode(node) {
     if (this.compare.isEmpty(node.right)) {
       return node;
     }
@@ -104,7 +104,7 @@ export default class BinarySearchTree {
   search(key) {
     return this.searchNode(this.root, key);
   }
-  searchNode(node, key) {
+  protected searchNode(node, key) {
     const { isEmpty, isLess, isEqual } = this.compare;
 
     if (isEmpty(node)) {
@@ -124,7 +124,7 @@ export default class BinarySearchTree {
   remove(key) {
     this.root = this.removeNode(this.root, key);
   }
-  removeNode(node, key) {
+  protected removeNode(node, key) {
     const { isEmpty, isEqual, isLess } = this.compare;
     if (isEmpty(node)) {
       return null;
@@ -142,6 +142,10 @@ export default class BinarySearchTree {
       } else if (isEmpty(node.right)) {
         return node.left;
       }
+      // 你是最强的 最棒的 最亮的 最发光的
+      // 拦不住你发芽
+      // 你是最好的 最俏的 最妙的 最骄傲的
+      // 尽情的盛开吧
 
       // 左右分支都存在
       const rightMin = this.minNode(node.right);
