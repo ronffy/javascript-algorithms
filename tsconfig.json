@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "esNext",
+    "target": "es2017",
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "moduleResolution": "node",
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "webpack.config.js"
+  ]
+}
