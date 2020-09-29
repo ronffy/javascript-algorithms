@@ -51,7 +51,7 @@ avlTree.remove(3)
 
 console.log('avlTree', JSON.stringify(avlTree.root));
 
-avlTree.flipLeftRight();
+avlTree.invert();
 console.log('avlTree', JSON.stringify(avlTree.root));
 
 

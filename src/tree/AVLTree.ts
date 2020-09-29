@@ -2,7 +2,7 @@
  * @description 二叉平衡树
  * @author ronffy
  * @Date 2020-09-25 17:27:10
- * @LastEditTime 2020-09-29 16:02:39
+ * @LastEditTime 2020-09-29 16:17:37
  * @LastEditors ronffy
  */
 import BinarySearchTree from './BinarySearchTree';
@@ -168,11 +168,11 @@ export default class AVLTree extends BinarySearchTree {
   }
 
   // 左右翻转树
-  flipLeftRight() {
-    this.root = this.flipLeftRightNode(this.root);
+  invert() {
+    this.root = this.invertNode(this.root);
   }
 
-  protected flipLeftRightNode(node: TreeNode) {
+  protected invertNode(node: TreeNode) {
     const { isEmpty } = this.compare;
     if (isEmpty(node)) {
       return null;
@@ -183,11 +183,11 @@ export default class AVLTree extends BinarySearchTree {
 
     node.right = isEmpty(leftNode)
       ? null
-      : this.flipLeftRightNode(leftNode)
+      : this.invertNode(leftNode)
 
     node.left = isEmpty(rightNode)
       ? null
-      : this.flipLeftRightNode(rightNode)
+      : this.invertNode(rightNode)
 
     return node;
   }
