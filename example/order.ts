@@ -2,7 +2,7 @@
  * @description 排序算法
  * @author ronffy
  * @Date 2020-09-29 18:10:33
- * @LastEditTime 2020-09-30 19:03:50
+ * @LastEditTime 2020-10-09 17:41:46
  * @LastEditors ronffy
  */
 import getRandomArray from '../src/utils/getRandomArray';
@@ -11,19 +11,32 @@ import selectionSort from '../src/order/selectionSort';
 import insertionSort from '../src/order/insertionSort';
 import mergeSort from '../src/order/mergeSort';
 import bucketSort from '../src/order/bucketSort';
+import radixSort from '../src/order/radixSort';
 
-const demoArray = getRandomArray(100, 0, 100);
-
-demoArray.push(10000)
+const demoArray = getRandomArray(20000, 101, 100000000);
 
 console.log('demoArray:', demoArray);
 
-console.log('bubble:', bubbleSort([...demoArray]));
+// console.time('bubble-time');
+// console.log('bubble:', bubbleSort([...demoArray]));
+// console.timeEnd('bubble-time');
 
-console.log('selectionSort:', selectionSort([...demoArray]));
+// console.time('selectionSort-time');
+// console.log('selectionSort:', selectionSort([...demoArray]));
+// console.timeEnd('selectionSort-time');
 
-console.log('insertionSort:', insertionSort([...demoArray]));
+// console.time('insertionSort-time');
+// console.log('insertionSort:', insertionSort([...demoArray]));
+// console.timeEnd('insertionSort-time');
 
-console.log('mergeSort:', mergeSort([...demoArray]));
+// console.time('mergeSort-time');
+// console.log('mergeSort:', mergeSort([...demoArray]));
+// console.timeEnd('mergeSort-time');
 
-console.log('bucketSort:', bucketSort([...demoArray]));
+// console.time('bucketSort-time');
+// console.log('bucketSort:', bucketSort([...demoArray]));
+// console.timeEnd('bucketSort-time');
+
+console.time('radixSort-time');
+console.log('radixSort:', radixSort([...demoArray]));
+console.timeEnd('radixSort-time');
