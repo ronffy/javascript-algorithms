@@ -2,12 +2,30 @@
  * @description 不重复随机整数的数组
  * @author ronffy
  * @Date 2020-09-30 14:30:42
- * @LastEditTime 2020-09-30 15:58:14
+ * @LastEditTime 2020-10-10 17:35:31
  * @LastEditors ronffy
  */
 import getRandom from "./getRandom";
 
-export default function getRandomArray(length, min?, max?): number[] {
+interface Config {
+  min?: number
+  max?: number
+  repeated?: boolean // 是否允许数组内有重复项
+}
+
+const defaultConfig: Config = {
+  repeated: true,
+}
+
+export default function getRandomArray(length, config: Config = {}): number[] {
+  const {
+    min,
+    max,
+    repeated,
+  } = {
+    ...defaultConfig,
+    ...config,
+  };
   if (typeof length === 'undefined') {
     console.warn('getRandomArray 参数不完整.');
     return [];
@@ -20,6 +38,10 @@ export default function getRandomArray(length, min?, max?): number[] {
   ) {
     console.warn('getRandomArray max-min 范围不能小于length.');
     return []
+  }
+
+  if (repeated) {
+    return Array.from({ length }, () => getRandom(min, max));
   }
 
   const result = new Set<number>();
