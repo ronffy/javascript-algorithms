@@ -2,18 +2,18 @@
  * @description 排序算法
  * @author ronffy
  * @Date 2020-09-29 18:10:33
- * @LastEditTime 2020-10-10 19:23:19
+ * @LastEditTime 2020-10-25 17:58:47
  * @LastEditors ronffy
  */
 import getRandomArray from '../src/utils/getRandomArray';
-import bubbleSort from '../src/order/bubbleSort';
-import selectionSort from '../src/order/selectionSort';
-import insertionSort from '../src/order/insertionSort';
-import mergeSort from '../src/order/mergeSort';
-import bucketSort from '../src/order/bucketSort';
-import radixSort from '../src/order/radixSort';
-import quickSort from '../src/order/quickSort';
-import countingSort from '../src/order/countingSort';
+import bubbleSort from '../src/sort/bubbleSort';
+import selectionSort from '../src/sort/selectionSort';
+import insertionSort from '../src/sort/insertionSort';
+import mergeSort from '../src/sort/mergeSort';
+import bucketSort from '../src/sort/bucketSort';
+import radixSort from '../src/sort/radixSort';
+import quickSort from '../src/sort/quickSort';
+import countingSort from '../src/sort/countingSort';
 
 const demoArray = getRandomArray(2000, {
   min: 1,
